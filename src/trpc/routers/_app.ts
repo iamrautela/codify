@@ -4,7 +4,7 @@ export const appRouter = createTRPCRouter({
   createAI: baseProcedure
     .input(
       z.object({
-        text: z.number(),
+        text: z.string(),
       }),
     )
     .query((opts) => {

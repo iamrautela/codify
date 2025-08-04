@@ -1,17 +1,14 @@
-"use client";
-import { useTRPC } from "@/trpc/client";
+import { caller } from "@/trpc/server";
 
-
-const Page = () => {
-  const trpc = useTRPC();
-  trpc.createAI.queryOptions({text: 123});
+const Page = async () => {
+  const data = await caller.createAI({ text: "ABHISHEK SERVER" });
 
   return (
     <div>
-      Hello world!
+      {JSON.stringify(data)}
     </div>
   );
-}
+};
 
 export default Page;
 
