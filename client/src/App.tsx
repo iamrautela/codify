@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router"
-import Home from './pages/Pricing'
+import Home from './pages/Home'
 import Pricing from './pages/Pricing'
 import Projects from './pages/Projects'
 import Preview from './pages/Preview'
