@@ -1,117 +1,277 @@
-# 🚀 Codify — AI Prompt‑to‑Production Website Builder
+# 🚀 Codify — AI-Powered Website Builder
 
-**Codify** transforms plain‑English prompts into **production‑ready web applications** in minutes. From idea → UI → backend → database → deployment, Codify automates the full lifecycle using the **PERN Stack (PostgreSQL, Express, React, Node.js)**—so builders can focus on *what* to build, not *how* to wire it together.
-
----
-
-## ✨ Highlights
-
-* 🧠 **Prompt → App**: Describe your idea; Codify scaffolds the frontend, backend, and database.
-* ⚡ **Production‑Grade**: Clean architecture, linted code, env configs, and scalable patterns.
-* 🎨 **Modern UI**: Responsive React components with reusable design primitives.
-* 🔐 **Secure by Default**: Auth, role‑based access, and API validation.
-* 🧩 **Extensible**: Plug in features, swap templates, or customize the generated code.
-* ☁️ **Deploy Ready**: Dockerized services and cloud‑friendly configs.
+**Codify** is a full-stack web application that transforms your thoughts into websites instantly using AI. Built with React, Node.js, Express, and MongoDB, featuring Google OAuth authentication.
 
 ---
 
-## 🧱 Tech Stack (PERN)
+## ✨ Features
 
-* **Frontend** ⚛️: React, TypeScript, modern state management
-* **Backend** 🧠: Node.js, Express, RESTful APIs
-* **Database** 🗄️: PostgreSQL (schema migrations + seeders)
-* **Infra** 🐳: Docker, environment‑based configs
-* **Tooling** 🛠️: ESLint, Prettier, GitHub Actions (CI)
-
----
-
-## 🧭 How It Works
-
-1. 📝 **Prompt** — Describe your app (features, auth, entities, pages).
-2. 🧠 **Generate** — Codify creates a full‑stack blueprint and codebase.
-3. 🎨 **Customize** — Edit UI/components or APIs as needed.
-4. 🚀 **Deploy** — Ship with Docker or your favorite cloud provider.
+* 🎨 **Beautiful Modern UI** — Enhanced landing page with gradient backgrounds and smooth animations
+* 🔐 **Google OAuth Authentication** — Secure login/signup with Google
+* 🛡️ **Protected Routes** — Dashboard accessible only after authentication
+* ⚡ **Full-Stack Architecture** — React frontend + Express backend + MongoDB database
+* 🎯 **AI-Powered** — Describe your website and let AI build it for you
 
 ---
 
-## 🖥️ Key Features
+## 🧱 Tech Stack
 
-* 🧩 **AI Scaffolding Engine** (routes, controllers, services, schemas)
-* 🔑 **Authentication & Authorization** (JWT, roles)
-* 📦 **CRUD Generation** for entities
-* 🔎 **API Validation & Error Handling**
-* 📈 **Performance‑Ready** patterns
-* 🧪 **Testing Hooks** (ready for unit/integration tests)
+### Frontend
+* **React 19** with TypeScript
+* **Vite** for fast development
+* **React Router** for navigation
+* **Tailwind CSS** for styling
+* **Google OAuth** for authentication
+* **Axios** for API calls
+
+### Backend
+* **Node.js** with Express
+* **MongoDB** with Mongoose
+* **JWT** for token-based authentication
+* **Google Auth Library** for OAuth verification
 
 ---
 
 ## 📂 Project Structure
 
 ```
-root/
-├─ client/          # React frontend
-├─ server/          # Node + Express backend
-├─ db/              # PostgreSQL schemas & migrations
-├─ docker/          # Docker configs
-├─ .env.example     # Environment variables
-└─ README.md
+codify/
+├── frontend/              # Frontend React app
+│   ├── src/              # Source code
+│   │   ├── components/   # Reusable components
+│   │   ├── context/      # React context (Auth)
+│   │   ├── pages/        # Page components
+│   │   │   ├── Login.tsx
+│   │   │   ├── Signup.tsx
+│   │   │   └── Dashboard.tsx
+│   │   ├── config/       # Configuration files
+│   │   ├── App.tsx       # Main app component
+│   │   └── main.tsx      # Entry point
+│   ├── public/           # Static assets
+│   ├── package.json      # Frontend dependencies
+│   └── vite.config.ts    # Vite configuration
+├── backend/              # Backend Express app
+│   ├── models/           # MongoDB models
+│   ├── routes/           # API routes
+│   ├── middleware/       # Express middleware
+│   ├── server.js         # Server entry point
+│   └── package.json      # Backend dependencies
+├── package.json          # Root package.json (scripts)
+└── README.md
 ```
 
 ---
 
 ## ⚙️ Getting Started
 
+### Prerequisites
+
+* Node.js (v18 or higher)
+* MongoDB (local installation or MongoDB Atlas)
+* Google OAuth credentials
+
+### 1. Clone and Install
+
 ```bash
-# Clone
-git clone https://github.com/your-username/codify
-cd codify
+# Install all dependencies (frontend + backend)
+npm run install:all
 
-# Install dependencies
-cd client && npm install
-cd ../server && npm install
+# Or install separately:
+# Frontend
+cd frontend && npm install && cd ..
 
-# Configure environment
-cp .env.example .env
+# Backend
+cd backend && npm install && cd ..
+```
 
-# Run locally
+### 2. Set Up Google OAuth
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Enable Google+ API
+4. Create OAuth 2.0 credentials
+5. Add authorized redirect URIs:
+   - `http://localhost:3000` (for development)
+6. Copy your Client ID and Client Secret
+
+### 3. Configure Environment Variables
+
+#### Frontend (frontend/.env)
+
+Create a `.env` file in the `frontend` directory:
+
+```env
+VITE_GOOGLE_CLIENT_ID=your_google_client_id_here
+VITE_API_URL=http://localhost:5000
+```
+
+#### Backend (backend/.env)
+
+Create a `.env` file in the `backend` directory:
+
+```env
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/codify
+JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
+GOOGLE_CLIENT_ID=your_google_client_id_here
+GOOGLE_CLIENT_SECRET=your_google_client_secret_here
+FRONTEND_URL=http://localhost:3000
+```
+
+### 4. Start MongoDB
+
+If using local MongoDB:
+
+```bash
+# macOS (with Homebrew)
+brew services start mongodb-community
+
+# Linux
+sudo systemctl start mongod
+
+# Windows
+# Start MongoDB service from Services panel
+```
+
+Or use [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) for cloud database.
+
+### 5. Run the Application
+
+#### Option 1: Run together (Recommended)
+
+```bash
+npm run dev:all
+```
+
+#### Option 2: Run separately
+
+```bash
+# Terminal 1: Start frontend
 npm run dev
+
+# Terminal 2: Start backend
+npm run dev:backend
+```
+
+### 6. Access the Application
+
+* Frontend: http://localhost:3000
+* Backend API: http://localhost:5000
+
+---
+
+## 🎯 Usage
+
+1. **Sign Up / Login**: Click "Get started" or navigate to login/signup page
+2. **Google Authentication**: Sign in with your Google account
+3. **Dashboard**: After authentication, you'll be redirected to the dashboard
+4. **Create Website**: Enter a description of your website and click "Create with AI"
+
+---
+
+## 🔒 Authentication Flow
+
+1. User clicks Google Sign In button
+2. Frontend receives Google OAuth token
+3. Frontend sends token to backend `/api/auth/google`
+4. Backend verifies token with Google
+5. Backend creates/finds user in MongoDB
+6. Backend generates JWT token
+7. Frontend stores JWT and user data
+8. Protected routes check for valid JWT
+
+---
+
+## 📝 API Endpoints
+
+### Authentication
+* `POST /api/auth/google` — Authenticate with Google OAuth token
+* `GET /api/auth/verify` — Verify JWT token
+
+### User
+* `GET /api/user/profile` — Get user profile (protected)
+
+### Health
+* `GET /api/health` — Server health check
+
+---
+
+## 🛠️ Development
+
+### Frontend Scripts
+```bash
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run preview  # Preview production build
+```
+
+### Backend Scripts
+```bash
+cd backend
+npm run dev      # Start with auto-reload
+npm start        # Start production server
+
+# Or from root:
+npm run dev:backend
+npm run start:backend
 ```
 
 ---
 
-## 📈 Use Cases
+## 🚀 Deployment
 
-* 🚀 MVPs & startups
-* 🧪 Hackathons & rapid prototyping
-* 🏗️ Internal tools
-* 📚 Learning full‑stack architecture
+### Frontend (Vercel/Netlify)
+1. Build the project: `npm run build`
+2. Deploy the `dist` folder
+3. Set environment variables in your hosting platform
+
+### Backend (Heroku/Railway/Render)
+1. Deploy the `backend` folder
+2. Set environment variables
+3. Ensure MongoDB connection (use MongoDB Atlas for cloud)
 
 ---
 
-## 🛣️ Roadmap
+## 📦 Dependencies
 
-* 🤖 Advanced prompt understanding
-* 🧠 AI‑assisted refactoring
-* 📱 Mobile‑first templates
-* 🔌 Plugin marketplace
-* ☁️ One‑click cloud deploys
+### Frontend
+- `react` & `react-dom` — UI framework
+- `react-router-dom` — Routing
+- `@react-oauth/google` — Google OAuth
+- `axios` — HTTP client
+- `tailwindcss` — CSS framework
+
+### Backend
+- `express` — Web framework
+- `mongoose` — MongoDB ODM
+- `jsonwebtoken` — JWT tokens
+- `google-auth-library` — Google OAuth verification
+- `cors` — CORS middleware
+- `dotenv` — Environment variables
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Open issues, submit PRs, and help shape the future of prompt‑driven development. 💙
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
 ## 📜 License
 
-MIT License — build freely, scale confidently.
+MIT License — feel free to use this project for learning and building.
 
 ---
 
-## ⭐ Why Codify?
+## ⭐ Features Roadmap
 
-Codify isn’t just a generator—it’s a **production mindset**. Clean code, real architecture, and deploy‑ready output. Perfect for developers, teams, and recruiters evaluating real‑world full‑stack skills. 🌟
+- [ ] AI website generation implementation
+- [ ] Project management dashboard
+- [ ] Website preview and editing
+- [ ] Export website functionality
+- [ ] User profile management
+- [ ] Payment integration for premium features
 
-> *From an idea in your head to an app in the cloud—Codify does the heavy lifting.*
+---
+
+**Built with ❤️ using React, Node.js, and MongoDB**
